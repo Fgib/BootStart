@@ -48,6 +48,14 @@ int main(void)
     sfSprite *dot = sfSprite_create();
     int i = 0;
     sfVector2f coo;
+    sfText *score;
+    sfFont *font_score;
+    score = sfText_create();
+    font_score = sfFont_createFromFile("Nuvel.ttf");
+    sfText_setColor(score, sfWhite);
+    sfText_setCharacterSize(score, 60);
+    sfText_setFont(score, font_score);
+    sfText_setPosition(score, (sfVector2f){100, 100});
 
     texture = sfTexture_createFromFile("bird_spritesheet.png", NULL);
     sfSprite_setTexture(dot, texture, sfTrue);
@@ -59,7 +67,7 @@ int main(void)
             if (event.type == sfEvtMouseButtonPressed)
                 printf("x= %d\ty= %d\n", event.mouseButton.x, event.mouseButton.y);
         }
-        if (sfClock_getElapsedTime(var_temp).microseconds > 41667) {
+        if (sfClock_getElapsedTime(var_temp).microseconds > 41667 * 4) {
             i += i < 3 ? 1 : -3;
             manage_animation(dot, i);
             sfRenderWindow_clear(window, sfBlack);
@@ -67,6 +75,8 @@ int main(void)
             coo.x = 5;
             coo.y = 3;
             sfSprite_setPosition(dot, coo);
+            sfText_setString(score, "I won");
+            sfRenderWindow_drawText(window, score, NULL);
             sfRenderWindow_display(window);
             sfClock_restart(var_temp);
         }

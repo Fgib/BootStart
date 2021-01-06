@@ -59,7 +59,7 @@ int main(void)
             if (event.type == sfEvtClosed)
                 sfRenderWindow_close(window);
         }
-        if (sfClock_getElapsedTime(time).microseconds > 41667 * 3) {
+        if (sfClock_getElapsedTime(time).microseconds > 41667) {
             if (cpt < 3)
                 cpt++;
             else 
@@ -70,7 +70,6 @@ int main(void)
             coo.y = 150;
             sfRenderWindow_drawSprite(window, dot, NULL);
             sfSprite_setPosition(dot, coo);
-            sfSprite_setOrigin();
             sfSprite_setRotation(dot, 45 * cpt);
             sfRenderWindow_display(window);
             sfClock_restart(time);

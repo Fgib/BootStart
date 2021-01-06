@@ -58,7 +58,11 @@ int main(void)
                 printf("x= %d\ty= %d\n", event.mouseButton.x, event.mouseButton.y);
         }
         if (sfClock_getElapsedTime(var_temp).microseconds > 41667) {
-            i += i < 1000 ? 5 : -1000;
+            if (i < 1000) {
+                i += 10;
+            } else {
+                i = 0;
+            }
             manage_animation(dot, i);
             sfRenderWindow_clear(window, sfBlack);
             sfRenderWindow_drawSprite(window, dot, NULL);
